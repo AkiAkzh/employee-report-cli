@@ -19,6 +19,13 @@ def main():
         choices=["payout"],
         help="Report type (for example, payment)")
 
+    parser.add_argument(
+        "--format",
+        choices=["table", "json"],
+        default="table",
+        help="Output format of the report"
+    )
+
     args = parser.parse_args()
 
     employees = []
@@ -27,7 +34,8 @@ def main():
 
     if args.report == "payout":
         report = generate_payout_report(
-            employees=employees
+            employees=employees,
+            format=args.format
         )
         print(report)
     else:

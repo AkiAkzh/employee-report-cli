@@ -1,3 +1,5 @@
+import json
+
 import pytest
 from typing import List
 from models.employee import Employee
@@ -41,3 +43,19 @@ def test_generate_payout_report_formatting():
     assert "Miyu Sato" in report
     assert "$2500" in report
     assert "$2500" in report.splitlines()[-2]  # Total payout
+
+def test_generate_payout_report_json_output():
+    employees = [
+        Employee(name="Yuna Kim", department="Marketing", hours_worked=160, hourly_rate=50),
+        Employee(name="Haruka Tanaka", department="Marketing", hours_worked=150, hourly_rate=40)
+    ]
+
+    output = generate_payout_report(employees, format="json")
+    data = json.loads(output)
+
+    assert "Marketing" in data
+    assert "employees" in data["Marketing"]
+    assert "total_payout" in data["Marketing"]
+    assert data["Marketing"]["total_payout"] == 8000 + 6000
+    assert any(emp["name"] == "Yuna Kim" for emp in data["Marketing"]["employees"])
+    assert any(emp["name"] == "Haruka Tanaka" for emp in data["Marketing"]["employees"])
