@@ -84,12 +84,19 @@ Design
 │   └── csv_parser.py
 ├── reports/
 │   └── payout_report.py
+├── screenshots/
+│   └── coverage.png
 ├── tests/
 │   ├── test_parser.py
 │   └── test_report.py
 ├── pytest.ini
 └── README.md
 ```
+
+---
+
+## Тесты и покрытие
+![Тесты и покрытие](screenshots/coverage.png)
 
 ---
 
