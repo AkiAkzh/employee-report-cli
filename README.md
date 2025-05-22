@@ -56,20 +56,64 @@ CLI-инструмент для генерации отчётов по зарп�
 </details>
 ---
 
-## Пример вывода (`--report payout`)
+##  Форматы вывода
+
+По умолчанию отчёт отображается в виде таблицы, но также можно вывести его в формате JSON с помощью аргумента `--format`:
+
+### ▶ Табличный формат (по умолчанию)
+
+```bash
+python main.py data1.csv data2.csv data3.csv --report payout
+```
 
 ```
 Marketing
                 name              hours  rate   payout
-                Yuna Kim         160    50     $8000
+--------------- Yuna Kim         160    50     $8000
                                         $8000
 
 Design
                 Haruka Tanaka    150    35     $5250
-                Miyu Sato        140    40     $5600
+--------------- Miyu Sato        140    40     $5600
                                         $10850
 ```
 
+
+### ▶ JSON формат 
+
+
+```bash
+python main.py data1.csv data2.csv data3.csv --report payout --format json
+```
+
+```
+{
+    "Marketing": {
+        "employees": [
+            {
+                "name": "Yuna Kim",
+                "department": "Marketing",
+                "hours_worked": 160,
+                "hourly_rate": 50,
+                "payout": 8000
+            }
+        ],
+        "total_payout": 8000
+    },
+    "Design": {
+        "employees": [
+            {
+                "name": "Haruka Tanaka",
+                "department": "Design",
+                "hours_worked": 150,
+                "hourly_rate": 35,
+                "payout": 5250
+            }
+        ],
+        "total_payout": 5250
+    }
+}
+```
 
 ---
 
